@@ -7,7 +7,7 @@ const Home = () => {
     <div>
       <div className="flex flex-row p-5">
         {LINKS.map((link) => (
-          <Link to={link} className="px-5 font-bold">
+          <Link key={link} to={link} className="px-5 font-bold">
             {link}
           </Link>
         ))}

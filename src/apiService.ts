@@ -29,6 +29,7 @@ const getUsers = async () => {
   try {
     const response = await axiosClient.get("admin/users")
     if (response.data.message === "success") {
+      console.log("loggin success", response.data.data)
       return response.data.data
     }
     throw Error("Could not fetch users")
