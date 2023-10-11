@@ -1,15 +1,41 @@
-import axios from "axios"
-
-const getResidents = async (address) => {
-  const response = await axiosClient.get("residents", {
-    params: { address },
-  })
-
-  return response
+import axiosClient from "./axiosClient"
+const getResidents = async () => {
+  try {
+    const response = await axiosClient.get("admin/residents")
+    if (response.data.message === "success") {
+      return response.data.data
+    }
+    throw Error("Could not fetch residents")
+  } catch (error) {
+    console.log(error)
+    throw Error("Could not fetch")
+  }
 }
 
-const postResident = async ({ resident }) => {
-  const response = axiosClient.post("residents", { resident })
-  return response
+const getReviews = async () => {
+  try {
+    const response = await axiosClient.get("admin/reviews")
+    if (response.data.message === "success") {
+      return response.data.data
+    }
+    throw Error("Could not fetch reviews")
+  } catch (error) {
+    console.log(error)
+    throw Error("Could not fetch")
+  }
 }
-export const residentService = { getResidents, postResident }
+
+const getUsers = async () => {
+  try {
+    const response = await axiosClient.get("admin/users")
+    if (response.data.message === "success") {
+      return response.data.data
+    }
+    throw Error("Could not fetch users")
+  } catch (error) {
+    console.log(error)
+    throw Error("Could not fetch")
+  }
+}
+
+export const apiService = { getResidents, getReviews, getUsers }
