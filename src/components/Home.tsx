@@ -5,7 +5,7 @@ const LINKS = ["users", "reviews", "residents"]
 const Home = () => {
   return (
     <div>
-      <div className="flex flex-row p-5">
+      <div className="flex flex-row p-5 underline bg-black">
         {LINKS.map((link) => (
           <Link key={link} to={link} className="px-5 font-bold">
             {link}
