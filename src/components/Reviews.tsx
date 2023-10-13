@@ -1,14 +1,29 @@
 import { useEffect, useState } from "react"
 import { apiService } from "../apiService"
 
+interface Review {
+  reviewId: string
+  createdAt: string
+  residentFirstName: string
+  residentLastName: string
+  reviewerFirstName: string
+  reviewerLastName: string
+  review: string
+  rating: string
+}
+
+interface Response {
+  data: Review[]
+  message: string
+}
+
 const Reviews = () => {
-  const [reviews, setReviews] = useState([])
+  const [reviews, setReviews] = useState<Review[]>([])
   useEffect(() => {
     apiService
       .getReviews()
-      .then((result) => {
+      .then((result: Response) => {
         setReviews(result.data)
-        console.log(result)
       })
       .catch((err) => {
         console.log(err)
@@ -42,7 +57,7 @@ const Reviews = () => {
           </thead>
           <tbody>
             {reviews &&
-              reviews.map((review) => (
+              reviews.map((review: Review) => (
                 <tr
                   key={review.reviewId}
                   className="border-b dark:border-neutral-500"

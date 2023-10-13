@@ -1,14 +1,28 @@
 import { useEffect, useState } from "react"
 import { apiService } from "../apiService"
 
+interface Resident {
+  residentId: string
+  createdAt: string
+  firstName: string
+  lastName: string
+  residentAddress: string
+  type: string
+  unit: string
+}
+
+interface Response {
+  data: Resident[]
+  message: string
+}
+
 const Reviews = () => {
-  const [residents, setResidents] = useState([])
+  const [residents, setResidents] = useState<Resident[]>([])
   useEffect(() => {
     apiService
       .getResidents()
-      .then((result) => {
+      .then((result: Response) => {
         setResidents(result.data)
-        console.log(result)
       })
       .catch((err) => {
         console.log(err)
@@ -42,7 +56,7 @@ const Reviews = () => {
           </thead>
           <tbody>
             {residents &&
-              residents.map((residents) => (
+              residents.map((residents: Resident) => (
                 <tr
                   key={residents.residentId}
                   className="border-b dark:border-neutral-500"

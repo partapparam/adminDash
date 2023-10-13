@@ -1,8 +1,8 @@
 import axiosClient from "./axiosClient"
+
 const getResidents = async () => {
   try {
     const response = await axiosClient.get("admin/residents")
-    console.log(response)
     if (response.data.message === "error") {
       throw Error("Could not fetch residents")
     }
@@ -16,7 +16,6 @@ const getResidents = async () => {
 const getReviews = async () => {
   try {
     const response = await axiosClient.get("admin/reviews")
-    console.log(response)
     if (response.data.message === "error") {
       throw Error("Could not fetch reviews")
     }
@@ -30,7 +29,6 @@ const getReviews = async () => {
 const getUsers = async () => {
   try {
     const response = await axiosClient.get("admin/users")
-    console.log(response)
     if (response.data.message === "error") {
       throw Error("Could not fetch users")
     }

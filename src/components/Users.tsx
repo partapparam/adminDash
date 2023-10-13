@@ -1,14 +1,28 @@
 import { useEffect, useState } from "react"
 import { apiService } from "../apiService"
 
+interface User {
+  userId: string
+  createdAt: string
+  email: string
+  firstName: string
+  lastName: string
+  industry: string
+  jobTitle: string
+}
+
+interface Response {
+  data: User[]
+  message: string
+}
+
 const Users = () => {
-  const [users, setUsers] = useState([])
+  const [users, setUsers] = useState<User[]>([])
   useEffect(() => {
     apiService
       .getUsers()
-      .then((result) => {
+      .then((result: Response) => {
         setUsers(result.data)
-        console.log(result)
       })
       .catch((err) => {
         console.log(err)
@@ -30,10 +44,7 @@ const Users = () => {
                 Email
               </th>
               <th scope="col" className="px-6 py-4">
-                First
-              </th>
-              <th scope="col" className="px-6 py-4">
-                Last
+                Name
               </th>
               <th scope="col" className="px-6 py-4">
                 Industry
@@ -60,11 +71,9 @@ const Users = () => {
                     {user.email}
                   </td>
                   <td className="whitespace-nowrap px-6 py-4 font-medium">
-                    {user.firstName}
+                    {user.firstName} {user.lastName}
                   </td>
-                  <td className="whitespace-nowrap px-6 py-4 font-medium">
-                    {user.lastName}
-                  </td>
+
                   <td className="whitespace-nowrap px-6 py-4 font-medium">
                     {user.industry}
                   </td>
